@@ -11,4 +11,11 @@ class SpaceShip:
         # Load the space ship image and getting its rect
         self.image = pygame.image.load('images/mf.bmp')
         self.rect = self.image.get_rect()
+
+        # Start each new ship at the bottom center of the screen
+        self.rect.midbottom = self.screen_rect.midbottom
+
+    def blitme(self):
+        """Drawing the ship at a specific location"""
+        self.screen.blit(self.image, self.rect)
         

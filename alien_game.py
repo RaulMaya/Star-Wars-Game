@@ -1,6 +1,7 @@
 import sys
 import pygame
 from settings import Settings
+from space_ship import SpaceShip
 
 class AlienInvasion:
     """"Overall class to manage game assets and behavior"""
@@ -14,6 +15,8 @@ class AlienInvasion:
             (self.settings.screen_width, self.settings.screen_height))
         pygame.display.set_caption("Alien Invasion II")
 
+        self.space_ship = SpaceShip(self)
+
     def run_game(self):
         """Start the main loop for the game"""
         while True:
@@ -24,6 +27,7 @@ class AlienInvasion:
 
             # Redrawing the screen during each loop
             self.screen.fill(self.settings.bg_color)
+            self.space_ship.blitme
             
             # Make the screen visible
             pygame.display.flip()
