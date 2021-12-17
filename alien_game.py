@@ -27,7 +27,7 @@ class AlienInvasion:
 
             # Redrawing the screen during each loop
             self.screen.fill(self.settings.bg_color)
-            self.space_ship.blitme
+            self.space_ship.blitme()
             
             # Make the screen visible
             pygame.display.flip()

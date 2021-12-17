@@ -18,4 +18,3 @@ class SpaceShip:
     def blitme(self):
         """Drawing the ship at a specific location"""
         self.screen.blit(self.image, self.rect)
-        
