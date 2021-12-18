@@ -6,6 +6,7 @@ class SpaceShip:
     def __init__(self, alien_app_game):
         """Start the space ship and set the beginning point"""
         self.screen = alien_app_game.screen
+        self.settings = alien_app_game.settings
         self.screen_rect = alien_app_game.screen.get_rect()
 
         # Load the space ship image and getting its rect
@@ -15,6 +16,11 @@ class SpaceShip:
         # Start each new ship at the bottom center of the screen
         self.rect.midbottom = self.screen_rect.midbottom
 
+        # Store a decimal value for the ship horizontal and vertical position
+        self.x = float(self.rect.x)
+        self.y = float(self.rect.y)
+
+
         # Movement Flag
         self.moving_right = False
         self.moving_left = False
@@ -23,14 +29,19 @@ class SpaceShip:
 
     def update(self):
         """Update the ship's position according to the movement flag status"""
+        # Updating ships x and y values
         if self.moving_right:
-            self.rect.x += 1
+            self.x += self.settings.space_ship_speed
         elif self.moving_left:
-            self.rect.x -= 1
+            self.x -= self.settings.space_ship_speed
         elif self.moving_up:
-            self.rect.y -= 1
+            self.y -= self.settings.space_ship_speed
         elif self.moving_down:
-            self.rect.y += 1
+            self.y += self.settings.space_ship_speed
+
+        # Updating rect objects 
+        self.rect.x = self.x
+        self.rect.y = self.y
 
 
     def blitme(self):
