@@ -9,11 +9,29 @@ class SpaceShip:
         self.screen_rect = alien_app_game.screen.get_rect()
 
         # Load the space ship image and getting its rect
-        self.image = pygame.image.load('images/mf.bmp')
+        self.image = pygame.image.load('images/px-mf.bmp')
         self.rect = self.image.get_rect()
 
         # Start each new ship at the bottom center of the screen
         self.rect.midbottom = self.screen_rect.midbottom
+
+        # Movement Flag
+        self.moving_right = False
+        self.moving_left = False
+        self.moving_up = False
+        self.moving_down = False
+
+    def update(self):
+        """Update the ship's position according to the movement flag status"""
+        if self.moving_right:
+            self.rect.x += 1
+        elif self.moving_left:
+            self.rect.x -= 1
+        elif self.moving_up:
+            self.rect.y -= 1
+        elif self.moving_down:
+            self.rect.y += 1
+
 
     def blitme(self):
         """Drawing the ship at a specific location"""
