@@ -9,4 +9,10 @@ class Settings:
         self.bg_color = (136,0,21)
 
         # Space ship settings
-        self.space_ship_speed = 0.75
+        self.space_ship_speed = 1.25
+
+        # Bullet settings
+        self.bullet_speed =  1.00
+        self.bullet_width = 3
+        self.bullet_height = 15
+        self.bullet_color = (164, 66, 245)
