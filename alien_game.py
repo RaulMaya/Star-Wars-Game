@@ -2,6 +2,7 @@ import sys
 import pygame
 from settings import Settings
 from space_ship import SpaceShip
+from bullets import Bullets
 
 class AlienInvasion:
     """"Overall class to manage game assets and behavior"""
@@ -22,14 +23,16 @@ class AlienInvasion:
         pygame.display.set_caption("Empire Strikes Back")
 
         self.space_ship = SpaceShip(self)
+        self.bullets = pygame.sprite.Group()
 
     def run_game(self):
         """Start the main loop for the game"""
         while True:
             self._check_events()
-            self._update_screen()
             self.space_ship.update()
-
+            self.bullets.update()
+            self._update_screen()
+            
     def _check_events(self):
             # Watch for keyboard and mouse events.
             for event in pygame.event.get():
@@ -56,6 +59,8 @@ class AlienInvasion:
             self.space_ship.moving_down = True
         elif event.key == pygame.K_q:
             sys.exit()
+        elif event.key == pygame.K_SPACE:
+            self._fire_bullets()
 
     def _check_keyup_events(self, event):
         """Event handler that responds to keypresses"""
@@ -71,12 +76,19 @@ class AlienInvasion:
         elif event.key == pygame.K_DOWN:
             # Blocking the movement the ship down.
             self.space_ship.moving_down = False
+    
+    def _fire_bullets(self):
+        """Creating a new bullet"""
+        new_bullet = Bullets(self)
+        self.bullets.add(new_bullet)
 
 
     def _update_screen(self):
             # Redrawing the screen during each loop
             self.screen.fill(self.settings.bg_color)
             self.space_ship.blitme()
+            for bullet in self.bullets.sprites():
+                bullet.draw_bullets()
 
 
             # Make the screen visible
