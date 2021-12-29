@@ -3,6 +3,7 @@ import pygame
 from settings import Settings
 from space_ship import SpaceShip
 from bullets import Bullets
+from enemy import Enemy
 
 class AlienInvasion:
     """"Overall class to manage game assets and behavior"""
@@ -24,6 +25,14 @@ class AlienInvasion:
 
         self.space_ship = SpaceShip(self)
         self.bullets = pygame.sprite.Group()
+        self.enemies = pygame.sprite.Group()
+
+        self._create_fleet()
+
+    def _create_fleet(self):
+        # Fleet of enemies
+        enemy = Enemy(self)
+        self.enemies.add(enemy)
 
     def run_game(self):
         """Start the main loop for the game"""
@@ -98,6 +107,7 @@ class AlienInvasion:
             self.space_ship.blitme()
             for bullet in self.bullets.sprites():
                 bullet.draw_bullets()
+            self.enemies.draw(self.screen)
 
 
             # Make the screen visible
