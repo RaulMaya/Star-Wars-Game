@@ -38,10 +38,15 @@ class AlienInvasion:
 
         # Creating the first row of enemies
         for enemy_number in range(horizontal_enemies):
+            self._create_enemy(enemy_number)
+
+    def _create_enemy(self, enemy_number):
             enemy = Enemy(self)
+            enemy_width = enemy.rect.width
             enemy.x = enemy_width + 2 * enemy_width * enemy_number
             enemy.rect.x = enemy.x
             self.enemies.add(enemy)
+
 
     def run_game(self):
         """Start the main loop for the game"""
