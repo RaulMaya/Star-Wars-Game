@@ -32,7 +32,16 @@ class AlienInvasion:
     def _create_fleet(self):
         # Fleet of enemies
         enemy = Enemy(self)
-        self.enemies.add(enemy)
+        enemy_width = enemy.rect.width
+        horizontal_space = self.settings.screen_width - (1 * enemy_width)
+        horizontal_enemies = horizontal_space // (2 * enemy_width)
+
+        # Creating the first row of enemies
+        for enemy_number in range(horizontal_enemies):
+            enemy = Enemy(self)
+            enemy.x = enemy_width + 2 * enemy_width * enemy_number
+            enemy.rect.x = enemy.x
+            self.enemies.add(enemy)
 
     def run_game(self):
         """Start the main loop for the game"""
