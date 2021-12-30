@@ -33,19 +33,29 @@ class AlienInvasion:
         # Fleet of enemies
         enemy = Enemy(self)
         enemy_width = enemy.rect.width
+        enemy_height = enemy.rect.height
         horizontal_space = self.settings.screen_width - (1 * enemy_width)
         horizontal_enemies = horizontal_space // (2 * enemy_width)
 
-        # Creating the first row of enemies
-        for enemy_number in range(horizontal_enemies):
-            self._create_enemy(enemy_number)
+        # Determine the number of rows
+        enemy_ship_height = self.space_ship.rect.height
+        vertical_space = (self.settings.screen_height - (3 * enemy_height) - enemy_ship_height)
+        row_number = vertical_space // (2 * enemy_height)
 
-    def _create_enemy(self, enemy_number):
-            enemy = Enemy(self)
-            enemy_width = enemy.rect.width
-            enemy.x = enemy_width + 2 * enemy_width * enemy_number
-            enemy.rect.x = enemy.x
-            self.enemies.add(enemy)
+        # Creating the first row of enemies
+        for row in range(row_number):
+            for enemy_number in range(horizontal_enemies):
+                self._create_enemy(enemy_number,row)
+
+    def _create_enemy(self, enemy_number, row):
+        # Creating an enemy and place it
+        enemy = Enemy(self)
+        enemy_width = enemy.rect.width
+        enemy_height = enemy.rect.height
+        enemy.x = enemy_width + 2 * enemy_width * enemy_number
+        enemy.rect.x = enemy.x
+        enemy.rect.y = enemy.rect.height + 2 * enemy.rect.height * row 
+        self.enemies.add(enemy)
 
 
     def run_game(self):
