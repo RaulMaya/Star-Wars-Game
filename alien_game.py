@@ -76,7 +76,9 @@ class AlienInvasion:
             self._check_events()
             self.space_ship.update()
             self._update_bullets()
+            self._update_enemies()
             self._update_screen()
+
             
     def _check_events(self):
             # Watch for keyboard and mouse events.
@@ -128,7 +130,12 @@ class AlienInvasion:
         for bullet in self.bullets.copy():
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
-        print(len(self.bullets))        
+        print(len(self.bullets))
+
+    def _update_enemies(self):
+        # Update enemy position
+        self.enemies.update()
+        
     
     def _fire_bullets(self):
         """Creating a new bullet"""
