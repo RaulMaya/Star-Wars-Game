@@ -6,7 +6,7 @@ from bullets import Bullets
 from enemy import Enemy
 from pygame.locals import *
 from pygame import mixer
-import os,random
+import random
 
 N=200
 
@@ -46,7 +46,8 @@ class AlienInvasion:
         enemy = Enemy(self)
         enemy_width = enemy.rect.width
         enemy_height = enemy.rect.height
-        horizontal_space = self.settings.screen_width - (1 * enemy_width)
+        horizontal_space = self.settings.screen_width - (2 * enemy_width)
+        # horizontal_enemies = random.randint(3,horizontal_space // (2 * enemy_width))
         horizontal_enemies = horizontal_space // (2 * enemy_width)
 
         # Determine the number of rows
@@ -68,6 +69,19 @@ class AlienInvasion:
         enemy.rect.x = enemy.x
         enemy.rect.y = enemy.rect.height + 2 * enemy.rect.height * row 
         self.enemies.add(enemy)
+
+    def _check_fleet_edges(self):
+        # Responding if an enemy touch the edges
+        for enemy in self.enemies.sprites():
+            if enemy.check_edges():
+                self._change_fleet_direction()
+                break
+
+    
+    def _change_fleet_direction(self):
+        for enemy in self.enemies.sprites():
+            enemy.rect.y += self.settings.fleet_drop_speed
+        self.settings.fleet_direction *= -1
 
 
     def run_game(self):
@@ -134,6 +148,7 @@ class AlienInvasion:
 
     def _update_enemies(self):
         # Update enemy position
+        self._check_fleet_edges()
         self.enemies.update()
         
     

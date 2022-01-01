@@ -9,7 +9,7 @@ class Settings:
         self.bg_color = (0,0,0)
 
         # Space ship settings
-        self.space_ship_speed = 1.5
+        self.space_ship_speed = 4
 
         # Bullet settings
         self.bullet_speed =  2
@@ -20,6 +20,6 @@ class Settings:
 
         # Enemy Settings
         self.enemy_speed = 1.0
-        self.fleet_drop_speed = 10
+        self.fleet_drop_speed = 10.0
         # Fleet direction 1 = right / -1 = left
         self.fleet_direction = 1
