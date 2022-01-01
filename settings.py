@@ -1,3 +1,9 @@
+import os,sys,random
+import pygame
+from pygame.locals import *
+
+N = 200
+
 class Settings:
     """Class to store all settings from the Alien Invasion Game"""
 
@@ -6,7 +12,7 @@ class Settings:
         # Screen settings
         self.screen_width = 1200
         self.screen_height = 650
-        self.bg_color = (136,0,21)
+        self.bg_color = (0,0,0)
 
         # Space ship settings
         self.space_ship_speed = 1.25

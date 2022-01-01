@@ -6,7 +6,9 @@ from bullets import Bullets
 from enemy import Enemy
 from pygame.locals import *
 from pygame import mixer
+import os,random
 
+N=200
 
 class AlienInvasion:
     """"Overall class to manage game assets and behavior"""
@@ -21,13 +23,14 @@ class AlienInvasion:
         mixer.music.play()
 
         # Full Screen
-        self.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
-        self.settings.screen_width = self.screen.get_rect().width
-        self.settings.screen_height = self.screen.get_rect().height
+        # self.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
+        # self.settings.screen_width = self.screen.get_rect().width
+        # self.settings.screen_height = self.screen.get_rect().height
+
+
         
         # Custom Screen
-        # self.screen = pygame.display.set_mode(
-            # (self.settings.screen_width, self.settings.screen_height))
+        self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
         pygame.display.set_caption("Empire Strikes Back")
 
         self.space_ship = SpaceShip(self)
@@ -136,14 +139,34 @@ class AlienInvasion:
 
     def _update_screen(self):
             # Redrawing the screen during each loop
-            self.screen.fill(self.settings.bg_color)
-            self.space_ship.blitme()
-            for bullet in self.bullets.sprites():
-                bullet.draw_bullets()
-            self.enemies.draw(self.screen)
+            # create background
+        background = pygame.Surface(self.screen.get_size())
+        background = background.convert()
+    
+        # generate N stars
+        stars = [
+            [random.randint(0, self.settings.screen_width),random.randint(0, self.settings.screen_height)]
+            for x in range(N)
+        ]
+    
+        # main loop
+        background.fill((0,0,0))
+        for star in stars:
+            pygame.draw.line(background,
+                (255, 255, 255), (star[0], star[1]), (star[0], star[1]))
+            star[0] = star[0] - 1
+            if star[0] < 0:
+                star[0] = self.settings.screen_width
+                star[1] = random.randint(0, self.settings.screen_height)
+        self.screen.blit(background, (0,0))
 
-            # Make the screen visible
-            pygame.display.flip()
+        self.space_ship.blitme()
+        for bullet in self.bullets.sprites():
+            bullet.draw_bullets()
+        self.enemies.draw(self.screen)
+
+        # Make the screen visible
+        pygame.display.flip()
     
 
 if __name__ == '__main__':
