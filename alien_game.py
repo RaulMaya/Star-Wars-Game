@@ -146,6 +146,9 @@ class AlienInvasion:
                 self.bullets.remove(bullet)
         print(len(self.bullets))
 
+        # Check for any bullets that hit the enemy
+        collisions = pygame.sprite.groupcollide(self.bullets,self.enemies, True, True)
+
     def _update_enemies(self):
         # Update enemy position
         self._check_fleet_edges()

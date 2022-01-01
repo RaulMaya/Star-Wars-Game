@@ -20,6 +20,6 @@ class Settings:
 
         # Enemy Settings
         self.enemy_speed = 1.0
-        self.fleet_drop_speed = 10.0
+        self.fleet_drop_speed = 10
         # Fleet direction 1 = right / -1 = left
         self.fleet_direction = 1
