@@ -4,6 +4,9 @@ from settings import Settings
 from space_ship import SpaceShip
 from bullets import Bullets
 from enemy import Enemy
+from pygame.locals import *
+from pygame import mixer
+
 
 class AlienInvasion:
     """"Overall class to manage game assets and behavior"""
@@ -12,6 +15,10 @@ class AlienInvasion:
         """Run the game, and develop necessary resources"""
         pygame.init()
         self.settings = Settings()
+         
+        mixer.init()
+        mixer.music.load('music/Star Wars - John Williams - Duel Of The Fates.ogg')
+        mixer.music.play()
 
         # Full Screen
         self.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
@@ -28,6 +35,8 @@ class AlienInvasion:
         self.enemies = pygame.sprite.Group()
 
         self._create_fleet()
+
+
 
     def _create_fleet(self):
         # Fleet of enemies
@@ -133,9 +142,9 @@ class AlienInvasion:
                 bullet.draw_bullets()
             self.enemies.draw(self.screen)
 
-
             # Make the screen visible
             pygame.display.flip()
+    
 
 if __name__ == '__main__':
     # Make a game prothotype, and run the game
