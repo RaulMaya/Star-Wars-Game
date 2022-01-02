@@ -109,6 +109,7 @@ class StarWars:
             self._update_enemy_bullets()
             self._update_enemies()
             self._update_screen()
+            self._fire_enemy_bullets()
             
             
     def _check_events(self):
@@ -139,8 +140,7 @@ class StarWars:
             sys.exit()
         elif event.key == pygame.K_SPACE:
             self._fire_bullets()
-            self._fire_enemy_bullets()
-            print(len(self.enemies))
+            
 
             # Blaster Sound
             bullet_sound = mixer.Sound('music/blaster.mp3')
@@ -218,8 +218,11 @@ class StarWars:
 
 
     def _fire_enemy_bullets(self):
-        new_enemy_bullet = Enemy_Bullets(self)
-        self.enemy_bullets.add(new_enemy_bullet)
+        if random.randrange(0,50) == 1:
+            new_enemy_bullet = Enemy_Bullets(self)
+            self.enemy_bullets.add(new_enemy_bullet)
+            enemy_bullet_sound = mixer.Sound('music/TIE fighter fire 1.mp3')
+            enemy_bullet_sound.play()  
 
     def _update_screen(self):
             # Redrawing the screen during each loop
