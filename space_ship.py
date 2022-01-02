@@ -11,7 +11,7 @@ class SpaceShip:
 
         # Load the space ship image and getting its rect
         self.image = pygame.image.load('images/px-mf.bmp')
-        self.image.set_colorkey((0,0,0))
+        self.image.set_colorkey((0,0,0)) # Hiding the background ((0,0,0)) => Black images background
         self.rect = self.image.get_rect()
 
         # Start each new ship at the bottom center of the screen
