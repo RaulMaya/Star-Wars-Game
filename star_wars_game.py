@@ -7,6 +7,8 @@ from enemy import Enemy
 from pygame.locals import *
 from pygame import mixer
 import random
+from time import sleep
+from game_stats import GameStats
 
 N=200
 
@@ -18,9 +20,8 @@ class AlienInvasion:
         pygame.init()
         self.settings = Settings()
          
-        mixer.init()
         mixer.music.load('music/Star Wars - John Williams - Duel Of The Fates.ogg')
-        mixer.music.play()
+        mixer.music.play(-1)
 
         # Full Screen
         # self.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
@@ -31,7 +32,10 @@ class AlienInvasion:
         
         # Custom Screen
         self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
-        pygame.display.set_caption("Empire Strikes Back")
+        pygame.display.set_caption("Star Wars IV: Python Strikes Back")
+
+        # Create an instance to store game statistics
+        self.stats = GameStats(self)
 
         self.space_ship = SpaceShip(self)
         self.bullets = pygame.sprite.Group()
@@ -132,6 +136,10 @@ class AlienInvasion:
             sys.exit()
         elif event.key == pygame.K_SPACE:
             self._fire_bullets()
+
+            # Blaster Sound
+            bullet_sound = mixer.Sound('music/blaster.mp3')
+            bullet_sound.play()
 
     def _check_keyup_events(self, event):
         """Event handler that responds to keypresses"""

@@ -10,6 +10,7 @@ class Settings:
 
         # Space ship settings
         self.space_ship_speed = 4
+        self.ship_limit = 3
 
         # Bullet settings
         self.bullet_speed =  2
