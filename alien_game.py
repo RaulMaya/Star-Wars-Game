@@ -47,7 +47,7 @@ class AlienInvasion:
         enemy_width = enemy.rect.width
         enemy_height = enemy.rect.height
         horizontal_space = self.settings.screen_width - (2 * enemy_width)
-        # horizontal_enemies = random.randint(3,horizontal_space // (2 * enemy_width))
+        ## horizontal_enemies = random.randint(3,horizontal_space // (2 * enemy_width))
         horizontal_enemies = horizontal_space // (2 * enemy_width)
 
         # Determine the number of rows
@@ -58,7 +58,7 @@ class AlienInvasion:
         # Creating the first row of enemies
         for row in range(row_number):
             for enemy_number in range(horizontal_enemies):
-                self._create_enemy(enemy_number,row)
+                self._create_enemy(enemy_number,row,)
 
     def _create_enemy(self, enemy_number, row):
         # Creating an enemy and place it
@@ -146,8 +146,19 @@ class AlienInvasion:
                 self.bullets.remove(bullet)
         print(len(self.bullets))
 
+        self._check_bullet_enemy_collision()
+
+
+    def _check_bullet_enemy_collision(self):
+        """"Enemies Collision"""
         # Check for any bullets that hit the enemy
         collisions = pygame.sprite.groupcollide(self.bullets,self.enemies, True, True)
+
+        if not self.enemies:
+            # Destroy Bullets and create a new fleet
+            self.bullets.empty()
+            self._create_fleet()
+    
 
     def _update_enemies(self):
         # Update enemy position
