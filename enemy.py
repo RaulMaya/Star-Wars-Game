@@ -3,11 +3,11 @@ from pygame.sprite import Sprite
 
 class Enemy(Sprite):
 
-    def __init__(self, alien_app_game):
+    def __init__(self, sw_app_game):
         """Start the space ship and set the beginning point"""
         super().__init__()
-        self.screen = alien_app_game.screen
-        self.settings = alien_app_game.settings
+        self.screen = sw_app_game.screen
+        self.settings = sw_app_game.settings
 
 
         # Load the enemy ship image and getting its rect
