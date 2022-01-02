@@ -19,6 +19,10 @@ class Settings:
         self.bullet_color = (164, 66, 245)
         self.bullets_allowed = 5
 
+        # Enemy bullets
+        self.enemy_bullet_color = 	(124,252,0)
+        self.enemy_bullet_speed = 3
+
         # Enemy Settings
         self.enemy_speed = 1.0
         self.fleet_drop_speed = 10

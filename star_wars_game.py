@@ -9,10 +9,11 @@ from pygame import mixer
 import random
 from time import sleep
 from game_stats import GameStats
+from enemy_bullets import Enemy_Bullets
 
 N=200
 
-class AlienInvasion:
+class StarWars:
     """"Overall class to manage game assets and behavior"""
 
     def __init__(self):
@@ -20,7 +21,7 @@ class AlienInvasion:
         pygame.init()
         self.settings = Settings()
          
-        mixer.music.load('music/Star Wars - John Williams - Duel Of The Fates.ogg')
+        mixer.music.load('music/Music  Falcon vs The TIE fighters.mp3')
         mixer.music.play(-1)
 
         # Full Screen
@@ -40,6 +41,7 @@ class AlienInvasion:
         self.space_ship = SpaceShip(self)
         self.bullets = pygame.sprite.Group()
         self.enemies = pygame.sprite.Group()
+        self.enemy_bullets = pygame.sprite.Group()
 
         self._create_fleet()
 
@@ -104,9 +106,10 @@ class AlienInvasion:
             self._check_events()
             self.space_ship.update()
             self._update_bullets()
+            self._update_enemy_bullets()
             self._update_enemies()
             self._update_screen()
-
+            
             
     def _check_events(self):
             # Watch for keyboard and mouse events.
@@ -136,6 +139,8 @@ class AlienInvasion:
             sys.exit()
         elif event.key == pygame.K_SPACE:
             self._fire_bullets()
+            self._fire_enemy_bullets()
+            print(len(self.enemies))
 
             # Blaster Sound
             bullet_sound = mixer.Sound('music/blaster.mp3')
@@ -162,15 +167,27 @@ class AlienInvasion:
         for bullet in self.bullets.copy():
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
-        print(len(self.bullets))
+        # print(len(self.bullets))
 
         self._check_bullet_enemy_collision()
+    
+    def _update_enemy_bullets(self):
+        self.enemy_bullets.update()
+        # Getting rid of the old bullets
+        for bullet in self.enemy_bullets.copy():
+            if bullet.rect.bottom >= 1200:
+                self.enemy_bullets.remove(bullet)
+        print(len(self.enemy_bullets))
 
 
     def _check_bullet_enemy_collision(self):
         """"Enemies Collision"""
         # Check for any bullets that hit the enemy
         collisions = pygame.sprite.groupcollide(self.bullets,self.enemies, True, True)
+        if collisions:
+            # Blaster Sound
+            bullet_sound = mixer.Sound('music/TIE fighter explode.mp3')
+            bullet_sound.play()           
 
         if not self.enemies:
             # Destroy Bullets and create a new fleet
@@ -186,6 +203,11 @@ class AlienInvasion:
         # Looking for collisions enemies vs space ship
         if pygame.sprite.spritecollideany(self.space_ship, self.enemies):
             print("ZAMBOMBAZO")
+
+    
+    def _ship_hit(self):
+        """Respond to the ship being hit by an enemy"""
+
         
     
     def _fire_bullets(self):
@@ -194,6 +216,10 @@ class AlienInvasion:
             new_bullet = Bullets(self)
             self.bullets.add(new_bullet)
 
+
+    def _fire_enemy_bullets(self):
+        new_enemy_bullet = Enemy_Bullets(self)
+        self.enemy_bullets.add(new_enemy_bullet)
 
     def _update_screen(self):
             # Redrawing the screen during each loop
@@ -221,6 +247,10 @@ class AlienInvasion:
         self.space_ship.blitme()
         for bullet in self.bullets.sprites():
             bullet.draw_bullets()
+
+        for bullet_e in self.enemy_bullets.sprites():
+            bullet_e.draw_enemy_bullets()
+
         self.enemies.draw(self.screen)
 
         # Make the screen visible
@@ -229,5 +259,5 @@ class AlienInvasion:
 
 if __name__ == '__main__':
     # Make a game prothotype, and run the game
-    alien_app = AlienInvasion()
+    alien_app = StarWars()
     alien_app.run_game()
