@@ -232,16 +232,15 @@ class StarWars:
             # Decrease in ships left
             self.stats.ships_left -= 1
 
-            # Getting rid of any remaining aliens and bullets
-            self.enemies.empty()
+            # Getting rid of any remaining enemies and bullets
             self.bullets.empty()
+            self.enemy_bullets.empty()
 
             # Creating a new fleet and centering the ship
-            self._create_fleet()
-            self.space_ship.center_ship()
+            self._update_screen_wss()
 
             # Pause 
-            sleep(0.5)
+            sleep(0.1)
         else:
             self.stats.game_active = False
 
@@ -269,6 +268,45 @@ class StarWars:
                 self._ship_hit()
                 enemy_escape_sound = mixer.Sound('music/TIE fighter flyby 3.mp3')
                 enemy_escape_sound.play()
+
+
+    def _update_screen_wss(self):
+        # Redrawing the screen during each loop
+        # create background
+        background = pygame.Surface(self.screen.get_size())
+        background = background.convert()
+    
+        # generate N stars
+        stars = [
+            [random.randint(0, self.settings.screen_width),random.randint(0, self.settings.screen_height)]
+            for x in range(N)
+        ]
+    
+        # main loop
+        background.fill((0,0,0))
+        for star in stars:
+            pygame.draw.line(background,
+                (255, 255, 255), (star[0], star[1]), (star[0], star[1]))
+            star[0] = star[0] - 1
+            if star[0] < 0:
+                star[0] = self.settings.screen_width
+                star[1] = random.randint(0, self.settings.screen_height)
+        self.screen.blit(background, (0,0))
+
+        for bullet in self.bullets.sprites():
+            bullet.draw_bullets()
+
+        for bullet_e in self.enemy_bullets.sprites():
+            bullet_e.draw_enemy_bullets()
+
+        self.enemies.draw(self.screen)
+
+        # Drawing the play button
+        if not self.stats.game_active:
+            self.play_button.draw_button()
+
+        # Make the screen visible
+        pygame.display.flip()
 
 
     def _update_screen(self):
