@@ -129,6 +129,9 @@ class StarWars:
                     self._check_keydown_events(event)
                 elif event.type == pygame.KEYUP:
                     self._check_keyup_events(event)
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    mouse_position = pygame.mouse.get_pos()
+                    self._check_play_button(mouse_position)
 
     def _check_keydown_events(self, event):
         """Event handler that responds to keypresses"""
@@ -168,6 +171,11 @@ class StarWars:
         elif event.key == pygame.K_DOWN:
             # Blocking the movement the ship down.
             self.space_ship.moving_down = False
+
+    def _check_play_button(self, mouse_position):
+        """Start a new game when clicking on ths start button"""
+        if self.play_button.rect.collidepoint(mouse_position):
+            self.stats.game_active = True
 
     def _update_bullets(self):
         self.bullets.update()
