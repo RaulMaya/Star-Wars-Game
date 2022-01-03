@@ -104,12 +104,16 @@ class StarWars:
         """Start the main loop for the game"""
         while True:
             self._check_events()
-            self.space_ship.update()
-            self._update_bullets()
-            self._update_enemy_bullets()
-            self._update_enemies()
+
+            if self.stats.game_active:
+                self.space_ship.update()
+                self._update_bullets()
+                self._update_enemy_bullets()
+                self._update_enemies()
+                self._fire_enemy_bullets()
+
             self._update_screen()
-            self._fire_enemy_bullets()
+            
             
             
     def _check_events(self):
@@ -206,22 +210,29 @@ class StarWars:
         elif pygame.sprite.spritecollideany(self.space_ship, self.enemy_bullets):
             self._ship_hit()
 
+        
+        self._check_enemies_bottom()
+
     
     def _ship_hit(self):
         """Respond to the ship being hit by an enemy"""
-        # Decrease in ships left
-        self.stats.ships_left -= 1
+        if self.stats.ships_left > 0:
+            # Decrease in ships left
+            self.stats.ships_left -= 1
 
-        # Getting rid of any remaining aliens and bullets
-        self.enemies.empty()
-        self.bullets.empty()
+            # Getting rid of any remaining aliens and bullets
+            self.enemies.empty()
+            self.bullets.empty()
 
-        # Creating a new fleet and centering the ship
-        self._create_fleet()
-        self.space_ship.center_ship()
+            # Creating a new fleet and centering the ship
+            self._create_fleet()
+            self.space_ship.center_ship()
 
-        # Pause 
-        sleep(0.5)
+            # Pause 
+            sleep(0.5)
+        else:
+            self.stats.game_active = False
+
 
         
     def _fire_bullets(self):
@@ -232,7 +243,7 @@ class StarWars:
 
 
     def _fire_enemy_bullets(self):
-        if random.randrange(0,75) == 1:
+        if random.randrange(0,120) == 1:
             new_enemy_bullet = Enemy_Bullets(self)
             self.enemy_bullets.add(new_enemy_bullet)
             enemy_bullet_sound = mixer.Sound('music/TIE fighter fire 1.mp3')
