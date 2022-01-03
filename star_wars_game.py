@@ -193,7 +193,7 @@ class StarWars:
             # Destroy Bullets and create a new fleet
             self.bullets.empty()
             self._create_fleet()
-    
+
 
     def _update_enemies(self):
         # Update enemy position
@@ -202,14 +202,28 @@ class StarWars:
 
         # Looking for collisions enemies vs space ship
         if pygame.sprite.spritecollideany(self.space_ship, self.enemies):
-            print("ZAMBOMBAZO")
+            self._ship_hit()
+        elif pygame.sprite.spritecollideany(self.space_ship, self.enemy_bullets):
+            self._ship_hit()
 
     
     def _ship_hit(self):
         """Respond to the ship being hit by an enemy"""
+        # Decrease in ships left
+        self.stats.ships_left -= 1
+
+        # Getting rid of any remaining aliens and bullets
+        self.enemies.empty()
+        self.bullets.empty()
+
+        # Creating a new fleet and centering the ship
+        self._create_fleet()
+        self.space_ship.center_ship()
+
+        # Pause 
+        sleep(0.5)
 
         
-    
     def _fire_bullets(self):
         """Creating a new bullet"""
         if len(self.bullets) < self.settings.bullets_allowed:
@@ -218,11 +232,21 @@ class StarWars:
 
 
     def _fire_enemy_bullets(self):
-        if random.randrange(0,50) == 1:
+        if random.randrange(0,75) == 1:
             new_enemy_bullet = Enemy_Bullets(self)
             self.enemy_bullets.add(new_enemy_bullet)
             enemy_bullet_sound = mixer.Sound('music/TIE fighter fire 1.mp3')
-            enemy_bullet_sound.play()  
+            enemy_bullet_sound.play()
+
+    def _check_enemies_bottom(self):
+        screen_rect = self.screen.get_rect()
+        for e in self.enemies.sprites():
+            if  e.rect.bottom >= screen_rect.bottom:
+                # Treat this as if the ship gets hit
+                self._ship_hit()
+                enemy_escape_sound = mixer.Sound('music/TIE fighter flyby 3.mp3')
+                enemy_escape_sound.play()
+
 
     def _update_screen(self):
             # Redrawing the screen during each loop
@@ -262,5 +286,5 @@ class StarWars:
 
 if __name__ == '__main__':
     # Make a game prothotype, and run the game
-    alien_app = StarWars()
-    alien_app.run_game()
+    sw_app = StarWars()
+    sw_app.run_game()

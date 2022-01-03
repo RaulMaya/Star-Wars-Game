@@ -21,7 +21,7 @@ class Settings:
 
         # Enemy bullets
         self.enemy_bullet_color = 	(124,252,0)
-        self.enemy_bullet_speed = 3
+        self.enemy_bullet_speed = 3 
 
         # Enemy Settings
         self.enemy_speed = 1.0

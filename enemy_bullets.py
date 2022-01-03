@@ -19,7 +19,7 @@ class Enemy_Bullets(Sprite):
 
         # Bullets position as decimal value
         self.y = float(self.rect.y)
-        print(self.y)
+    
 
     def update(self):
         """Moving the bullet downwards"""
@@ -27,7 +27,7 @@ class Enemy_Bullets(Sprite):
         self.y += self.settings.enemy_bullet_speed
         # Update of rect position
         self.rect.y = self.y
-        print(self.rect.y)
+
 
     def draw_enemy_bullets(self):
         """Drawing the bullet on the screen"""
