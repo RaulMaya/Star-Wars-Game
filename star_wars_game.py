@@ -10,6 +10,7 @@ import random
 from time import sleep
 from game_stats import GameStats
 from enemy_bullets import Enemy_Bullets
+from button import Button
 
 N=200
 
@@ -44,6 +45,9 @@ class StarWars:
         self.enemy_bullets = pygame.sprite.Group()
 
         self._create_fleet()
+
+        # Displaying the PLAY button
+        self.play_button = Button(self, "Play")
 
 
 
@@ -260,8 +264,8 @@ class StarWars:
 
 
     def _update_screen(self):
-            # Redrawing the screen during each loop
-            # create background
+        # Redrawing the screen during each loop
+        # create background
         background = pygame.Surface(self.screen.get_size())
         background = background.convert()
     
@@ -290,6 +294,10 @@ class StarWars:
             bullet_e.draw_enemy_bullets()
 
         self.enemies.draw(self.screen)
+
+        # Drawing the play button
+        if not self.stats.game_active:
+            self.play_button.draw_button()
 
         # Make the screen visible
         pygame.display.flip()
