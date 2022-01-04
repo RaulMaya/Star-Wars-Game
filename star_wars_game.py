@@ -204,6 +204,9 @@ class StarWars:
             # Creating a new fleet and centering the space ship
             self._create_fleet()
             self.space_ship.center_ship()
+            
+            # Hiding the cursor
+            pygame.mouse.set_visible(False)
 
     def _update_bullets(self):
         self.bullets.update()
@@ -271,6 +274,7 @@ class StarWars:
             sleep(0.1)
         else:
             self.stats.game_active = False
+            pygame.mouse.set_visible(True)
 
 
         
