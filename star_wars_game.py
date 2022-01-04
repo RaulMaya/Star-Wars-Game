@@ -174,8 +174,20 @@ class StarWars:
 
     def _check_play_button(self, mouse_position):
         """Start a new game when clicking on ths start button"""
-        if self.play_button.rect.collidepoint(mouse_position):
+        button_active = self.play_button.rect.collidepoint(mouse_position)
+        if button_active and not self.stats.game_active:
+            # Reset Statistics
+            self.stats.reset_stats()
             self.stats.game_active = True
+
+            # Get rid of any remaining enemies and bullets
+            self.enemies.empty()
+            self.bullets.empty
+            self.enemy_bullets.empty()
+
+            # Creating a new fleet and centering the space ship
+            self._create_fleet()
+            self.space_ship.center_ship()
 
     def _update_bullets(self):
         self.bullets.update()
