@@ -11,6 +11,7 @@ from time import sleep
 from game_stats import GameStats
 from enemy_bullets import Enemy_Bullets
 from button import Button
+from quit_button import Quit_Button
 
 N=200
 
@@ -48,6 +49,7 @@ class StarWars:
 
         # Displaying the PLAY button
         self.play_button = Button(self, "Play")
+        self.quit_button = Quit_Button(self, "Quit")
 
 
 
@@ -131,7 +133,16 @@ class StarWars:
                     self._check_keyup_events(event)
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     mouse_position = pygame.mouse.get_pos()
+                    self._check_quit_button(mouse_position)
                     self._check_play_button(mouse_position)
+                elif self.quit_button.rect.collidepoint(pygame.mouse.get_pos()) or self.play_button.rect.collidepoint(pygame.mouse.get_pos()):
+                    pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_HAND)
+                elif not self.quit_button.rect.collidepoint(pygame.mouse.get_pos()):
+                    pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_ARROW)
+                elif not self.play_button.rect.collidepoint(pygame.mouse.get_pos()):
+                    pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_ARROW)
+
+
 
     def _check_keydown_events(self, event):
         """Event handler that responds to keypresses"""
@@ -171,6 +182,11 @@ class StarWars:
         elif event.key == pygame.K_DOWN:
             # Blocking the movement the ship down.
             self.space_ship.moving_down = False
+    
+    def _check_quit_button(self, mouse_position):
+        """Quit the game"""
+        if self.quit_button.rect.collidepoint(mouse_position):
+            sys.exit()
 
     def _check_play_button(self, mouse_position):
         """Start a new game when clicking on ths start button"""
@@ -355,7 +371,9 @@ class StarWars:
 
         # Drawing the play button
         if not self.stats.game_active:
+            self.quit_button.draw_button()
             self.play_button.draw_button()
+            
 
         # Make the screen visible
         pygame.display.flip()

@@ -1,6 +1,6 @@
 import pygame.font
 
-class Button:
+class Quit_Button:
 
     def __init__(self, sw_app_game, msg):
 
@@ -15,7 +15,7 @@ class Button:
         self.font = pygame.font.SysFont(None, 48)
 
         # Build the button's rect object and center it
-        self.rect = pygame.Rect(self.screen_rect.width/2 - self.width/2, 200, self.width, self.height)
+        self.rect = pygame.Rect(self.screen_rect.width/2 - self.width/2, 400, self.width, self.height)
         
 
         self._prep_msg(msg)
