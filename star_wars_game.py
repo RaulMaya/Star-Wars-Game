@@ -158,6 +158,23 @@ class StarWars:
         elif event.key == pygame.K_DOWN:
             # Move the ship down.
             self.space_ship.moving_down = True
+        elif not self.stats.game_active:
+            if event.key == pygame.K_p:
+                # Reset Statistics
+                self.stats.reset_stats()
+                self.stats.game_active = True
+
+                # Get rid of any remaining enemies and bullets
+                self.enemies.empty()
+                self.bullets.empty
+                self.enemy_bullets.empty()
+
+                # Creating a new fleet and centering the space ship
+                self._create_fleet()
+                self.space_ship.center_ship()
+                
+                # Hiding the cursor
+                pygame.mouse.set_visible(False)
         elif event.key == pygame.K_q:
             sys.exit()
         elif event.key == pygame.K_SPACE:
