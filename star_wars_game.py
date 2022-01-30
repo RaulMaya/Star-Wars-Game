@@ -215,9 +215,11 @@ class StarWars:
         if button_active and not self.stats.game_active:
             # Reset Settings
             self.settings.initialize_dynamic_settings()
+
             # Reset Statistics
             self.stats.reset_stats()
             self.stats.game_active = True
+            self.sb.prep_score()
 
             # Get rid of any remaining enemies and bullets
             self.enemies.empty()
@@ -255,8 +257,9 @@ class StarWars:
         # Check for any bullets that hit the enemy
         collisions = pygame.sprite.groupcollide(self.bullets,self.enemies, True, True)
         if collisions:
-            # Points
-            self.stats.score += self.settings.enemies_points
+            for enemies in collisions.values():
+                # Points
+                self.stats.score += self.settings.enemies_points * len(enemies)
             self.sb.prep_score()
             # Blaster Sound
             bullet_sound = mixer.Sound('music/TIE fighter explode.mp3')
