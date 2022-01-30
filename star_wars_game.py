@@ -220,6 +220,7 @@ class StarWars:
             self.stats.reset_stats()
             self.stats.game_active = True
             self.sb.prep_score()
+            self.sb.prep_level()
 
             # Get rid of any remaining enemies and bullets
             self.enemies.empty()
@@ -249,7 +250,7 @@ class StarWars:
         for bullet in self.enemy_bullets.copy():
             if bullet.rect.bottom >= 1200:
                 self.enemy_bullets.remove(bullet)
-        print(len(self.enemy_bullets))
+        # print(len(self.enemy_bullets))
 
 
     def _check_bullet_enemy_collision(self):
@@ -261,6 +262,7 @@ class StarWars:
                 # Points
                 self.stats.score += self.settings.enemies_points * len(enemies)
             self.sb.prep_score()
+            self.sb.check_high_score()
             # Blaster Sound
             bullet_sound = mixer.Sound('music/TIE fighter explode.mp3')
             bullet_sound.play()           
@@ -270,6 +272,10 @@ class StarWars:
             self.bullets.empty()
             self._create_fleet()
             self.settings.increase_speed()
+
+            # Increase Level
+            self.stats.level += 1
+            self.sb.prep_level()
 
 
     def _update_enemies(self):

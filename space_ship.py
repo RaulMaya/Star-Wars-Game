@@ -1,10 +1,12 @@
 import pygame
+from pygame.sprite import Sprite
 
-class SpaceShip:
+class SpaceShip(Sprite):
     """A class to develop the space ship"""
 
     def __init__(self, sw_app_game):
         """Start the space ship and set the beginning point"""
+        super().__init__()
         self.screen = sw_app_game.screen
         self.settings = sw_app_game.settings
         self.screen_rect = sw_app_game.screen.get_rect()
