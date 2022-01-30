@@ -12,6 +12,7 @@ from game_stats import GameStats
 from enemy_bullets import Enemy_Bullets
 from button import Button
 from quit_button import Quit_Button
+from scoreboard import Scoreboard
 
 N=200
 
@@ -35,10 +36,11 @@ class StarWars:
         
         # Custom Screen
         self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
-        pygame.display.set_caption("Star Wars IV: Python Strikes Back")
+        pygame.display.set_caption("Star Wars IV: Python Strikes Back") 
 
-        # Create an instance to store game statistics
+        # Create an instance to store game statistics and scoreboard
         self.stats = GameStats(self)
+        self.sb = Scoreboard(self)
 
         self.space_ship = SpaceShip(self)
         self.bullets = pygame.sprite.Group()
@@ -397,6 +399,9 @@ class StarWars:
             bullet_e.draw_enemy_bullets()
 
         self.enemies.draw(self.screen)
+
+        # Scoreboard information
+        self.sb.show_score()
 
         # Drawing the play button
         if not self.stats.game_active:
