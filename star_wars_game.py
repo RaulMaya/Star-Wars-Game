@@ -160,6 +160,8 @@ class StarWars:
             self.space_ship.moving_down = True
         elif not self.stats.game_active:
             if event.key == pygame.K_p:
+                # Reset Settings
+                self.settings.initialize_dynamic_settings()
                 # Reset Statistics
                 self.stats.reset_stats()
                 self.stats.game_active = True
@@ -175,15 +177,15 @@ class StarWars:
                 
                 # Hiding the cursor
                 pygame.mouse.set_visible(False)
+            elif event.key == pygame.K_q:
+                sys.exit()
         elif event.key == pygame.K_q:
             sys.exit()
         elif event.key == pygame.K_SPACE:
             self._fire_bullets()
             
 
-            # Blaster Sound
-            bullet_sound = mixer.Sound('music/blaster.mp3')
-            bullet_sound.play()
+
 
     def _check_keyup_events(self, event):
         """Event handler that responds to keypresses"""
@@ -209,6 +211,8 @@ class StarWars:
         """Start a new game when clicking on ths start button"""
         button_active = self.play_button.rect.collidepoint(mouse_position)
         if button_active and not self.stats.game_active:
+            # Reset Settings
+            self.settings.initialize_dynamic_settings()
             # Reset Statistics
             self.stats.reset_stats()
             self.stats.game_active = True
@@ -257,6 +261,7 @@ class StarWars:
             # Destroy Bullets and create a new fleet
             self.bullets.empty()
             self._create_fleet()
+            self.settings.increase_speed()
 
 
     def _update_enemies(self):
@@ -300,6 +305,9 @@ class StarWars:
         if len(self.bullets) < self.settings.bullets_allowed:
             new_bullet = Bullets(self)
             self.bullets.add(new_bullet)
+            # Blaster Sound
+            bullet_sound = mixer.Sound('music/blaster.mp3')
+            bullet_sound.play()
 
 
     def _fire_enemy_bullets(self):
