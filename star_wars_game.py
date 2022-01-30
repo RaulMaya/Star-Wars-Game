@@ -255,6 +255,9 @@ class StarWars:
         # Check for any bullets that hit the enemy
         collisions = pygame.sprite.groupcollide(self.bullets,self.enemies, True, True)
         if collisions:
+            # Points
+            self.stats.score += self.settings.enemies_points
+            self.sb.prep_score()
             # Blaster Sound
             bullet_sound = mixer.Sound('music/TIE fighter explode.mp3')
             bullet_sound.play()           
