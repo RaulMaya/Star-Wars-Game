@@ -182,16 +182,19 @@ class StarWars:
                 # Hiding the cursor
                 pygame.mouse.set_visible(False)
             elif event.key == pygame.K_q:
-                sys.exit()
+               if self.stats.score >= self.stats.high_score:
+                    self.stats.high_score = self.stats.score
+                    with open('high-score.txt', 'w') as f:
+                        f.write(str(self.stats.high_score))
+                    sys.exit()
+
         elif event.key == pygame.K_q:
-            if self.stats.score >= self.stats.high_score:
-                self.stats.high_score = self.stats.score
-                my_highscore = {'High-Score':self.stats.high_score}
-                high_score_df = pd.DataFrame(my_highscore)
-                high_score_df.to_csv('high-score.csv')
-                sys.exit()
-            else:
-                sys.exit()
+               if self.stats.score >= self.stats.high_score:
+                    self.stats.high_score = self.stats.score
+                    with open('high-score.txt', 'w') as f:
+                        f.write(str(self.stats.high_score))
+                    sys.exit()
+
         elif event.key == pygame.K_SPACE:
             self._fire_bullets()
             
