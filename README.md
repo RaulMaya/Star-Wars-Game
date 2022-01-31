@@ -25,7 +25,18 @@ A long time ago in a galaxy far far away, the Millenium Falcon is fighting Imper
 
 <hr>
 
+### Main Menu
+
 ![Star Wars](readme_files/AlienGame.png)
+
+<hr>
+
+
+### Gameplay
+
+![Star Wars](readme_files/PlayingSW.png)
+
+<hr>
 
 ### Contact
 
