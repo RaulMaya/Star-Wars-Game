@@ -1,3 +1,4 @@
+from pprint import pformat
 import sys
 import pygame
 from settings import Settings
@@ -13,6 +14,7 @@ from enemy_bullets import Enemy_Bullets
 from button import Button
 from quit_button import Quit_Button
 from scoreboard import Scoreboard
+import pandas as pd
 
 N=200
 
@@ -182,12 +184,17 @@ class StarWars:
             elif event.key == pygame.K_q:
                 sys.exit()
         elif event.key == pygame.K_q:
-            sys.exit()
+            if self.stats.score >= self.stats.high_score:
+                self.stats.high_score = self.stats.score
+                my_highscore = {'High-Score':self.stats.high_score}
+                high_score_df = pd.DataFrame(my_highscore)
+                high_score_df.to_csv('high-score.csv')
+                sys.exit()
+            else:
+                sys.exit()
         elif event.key == pygame.K_SPACE:
             self._fire_bullets()
             
-
-
 
     def _check_keyup_events(self, event):
         """Event handler that responds to keypresses"""
@@ -221,6 +228,7 @@ class StarWars:
             self.stats.game_active = True
             self.sb.prep_score()
             self.sb.prep_level()
+            self.sb.prep_space_ships()
 
             # Get rid of any remaining enemies and bullets
             self.enemies.empty()
@@ -298,6 +306,7 @@ class StarWars:
         if self.stats.ships_left > 0:
             # Decrease in ships left
             self.stats.ships_left -= 1
+            self.sb.prep_space_ships()
 
             # Getting rid of any remaining enemies and bullets
             self.bullets.empty()

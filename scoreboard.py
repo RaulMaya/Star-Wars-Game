@@ -1,6 +1,6 @@
 import pygame.font
-from pygame.sprite import Sprite
-from space_ship import SpaceShip
+from pygame.sprite import Group
+from life_ship import LifeShip
 
 class Scoreboard:
     """ A class to report scoring information."""
@@ -35,10 +35,11 @@ class Scoreboard:
         self.screen_rect.top = 20
 
     def show_score(self):
-        """Draw the score, the high score and level to the screen"""
+        """Draw the ships, score, the high score and level to the screen"""
         self.screen.blit(self.score_image, self.score_rect)
         self.screen.blit(self.high_score_image, self.high_score_rect)
         self.screen.blit(self.level_image, self.level_rect)
+        self.space_ships.draw(self.screen)
 
     def prep_high_score(self):
         """Turn the highscore into rendered image"""
@@ -66,3 +67,12 @@ class Scoreboard:
         self.level_rect = self.level_image.get_rect()
         self.level_rect.right = self.score_rect.right
         self.level_rect.top = self.score_rect.bottom + 10
+
+    def prep_space_ships(self):
+        """Show how many space ships are left"""
+        self.space_ships = Group()
+        for ship_number in range(self.stats.ships_left):
+            space_ship = LifeShip(self.sw_app_game)
+            space_ship.rect.x = 10 + ship_number * space_ship.rect.width
+            space_ship.rect.y = 10
+            self.space_ships.add(space_ship)
