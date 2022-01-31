@@ -181,12 +181,17 @@ class StarWars:
                 
                 # Hiding the cursor
                 pygame.mouse.set_visible(False)
+
             elif event.key == pygame.K_q:
-               if self.stats.score >= self.stats.high_score:
+                if self.stats.score >= self.stats.high_score:
                     self.stats.high_score = self.stats.score
                     with open('high-score.txt', 'w') as f:
                         f.write(str(self.stats.high_score))
+                        f.close()
                     sys.exit()
+                else:
+                    sys.exit()
+        
 
         elif event.key == pygame.K_q:
                if self.stats.score >= self.stats.high_score:
@@ -217,7 +222,11 @@ class StarWars:
     def _check_quit_button(self, mouse_position):
         """Quit the game"""
         if self.quit_button.rect.collidepoint(mouse_position):
-            sys.exit()
+            if self.stats.score >= self.stats.high_score:
+                    self.stats.high_score = self.stats.score
+                    with open('high-score.txt', 'w') as f:
+                        f.write(str(self.stats.high_score))
+                    sys.exit()
 
     def _check_play_button(self, mouse_position):
         """Start a new game when clicking on ths start button"""
