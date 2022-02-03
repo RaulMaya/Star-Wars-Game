@@ -1,12 +1,35 @@
-# <b>Star Wars IV: Python Strikes Back </b>
+## <b><u><p align="center">Star Wars IV: Python Strikes Back </p></u></b>
+
+![Star Wars](readme_files/sw_logo.png)
 
 <hr>
 
-![Star Wars](readme_files/sw_logo.png)
+### Quick Gameplay
+
+<br>
+
+![Star Wars](readme_files/swgif.gif)
+
+<hr>
+
+
 
 ### Introduction
 
 A long time ago in a galaxy far far away, the Millenium Falcon is fighting Imperial TIE-Fighters. The Millenium Falcon can move in right, left, up and down directions using the arrow keys and shoot rockets by pressing the spacebar. When the game begins, a group of TIE-Fighters will fill the sky. The user shoots and destroys the TIE-Fighters. If the user shoots all the TIE-Fighters, a new fleet will appear, that moves faster than the last one. If any TIE-Fighter hits the player ship or reaches the bottom, the user will lose a life. If the user loses three lifes, the game will be over.
+
+<hr>
+
+### Necessary Modules
+
+1. `pygame.locals`
+2. `pygame`
+3. `mixer`
+4. `random`
+5. `time`
+6. `sleep`
+7. `sys`
+8. `pygame`
 
 <hr>
 
@@ -31,12 +54,6 @@ A long time ago in a galaxy far far away, the Millenium Falcon is fighting Imper
 
 <hr>
 
-
-### Gameplay
-
-![Star Wars](readme_files/PlayingSW.png)
-
-<hr>
 
 ### Contact
 
