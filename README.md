@@ -1,64 +1,70 @@
-<h1 align="center">Awesome README Templates</h1>
+<h1 align="center">Star Wars IV: Python Strikes Back</h1>
+<p align="center"><i>Take a look at the <a href="https://www.youtube.com/watch?v=-mpaHcAdJ-U">Gameplay</a></i></p>
+<p align="center">
+<a href="https://github.com/RaulMaya/Star-Wars-Game">
+  <img src="readme_files/sw_logo.png" alt="Logo" width= 200">
+</a>
+</p>
 
-![Star Wars](readme_files/sw_logo.png) </p></u>
+## About This Project
 
-<hr>
+A long time ago in a galaxy far, far away, the Millennium Falcon is fighting Imperial TIE-Fighters. The Millennium Falcon can move in right, left, up and down directions using the arrow keys and shoot rockets by pressing the space bar. When the game begins, a group of TIE-Fighters will fill the sky. The user shoots and destroys the TIE-Fighters. If the user shoots all the TIE-Fighters, a new fleet will appear, that moves faster than the last one. If any TIE-Fighter hits the player ship or reaches the bottom, the user will lose a life. If the user loses three lives, the game will be over.
 
-### Quick Gameplay
-
-<br>
+## :video_game: Quick Gameplay
 
 ![Star Wars](readme_files/swgif.gif)
 
-<hr>
+## Starting
 
 
 
-### Introduction
+#### Installation
 
-A long time ago in a galaxy far far away, the Millenium Falcon is fighting Imperial TIE-Fighters. The Millenium Falcon can move in right, left, up and down directions using the arrow keys and shoot rockets by pressing the spacebar. When the game begins, a group of TIE-Fighters will fill the sky. The user shoots and destroys the TIE-Fighters. If the user shoots all the TIE-Fighters, a new fleet will appear, that moves faster than the last one. If any TIE-Fighter hits the player ship or reaches the bottom, the user will lose a life. If the user loses three lifes, the game will be over.
+1. Clone the repository
+```sh
+git clone https://github.com/RaulMaya/Star-Wars-Game.git
+```
 
-<hr>
+2. Necessary Modules
 
-### Necessary Modules
+- These are the modules that you need to install in the environment where you want to run the game. Run in your terminal the following commands.
 
-1. `pygame.locals`
-2. `pygame`
-3. `mixer`
-4. `random`
-5. `time`
-6. `sleep`
-7. `sys`
-8. `pygame`
+- pygame
+```sh
+python -m pip install --user pygame
+```
+<p><i>If the command doesn't work, try running again the command but without the --user flag</i></p>
 
-<hr>
+- random
+```sh
+pip install random
+```
 
-### Controls
+3. Run the app
+```sh
+python star_wars_game.py
+```
+
+## Controls
 
 ![Star Wars](readme_files/keyboard.jpg)
 
-* <b>Arrow-Up:</b> Moves the Millenium Falcom Up
-* <b>Arrow-Down:</b> Moves the Millenium Falcom Down
-* <b>Arrow-Left:</b> Moves the Millenium Falcom Left
-* <b>Arrow-Right:</b> Moves the Millenium Falcom Right
-* <b>Spacebar:</b> Shoots rockets
-* <b>P Key:</b> Pause the game
-* <b>S Key:</b> Start a new game (in the main menu)
-* <b>Q Key:</b> Quit the game
-
-<hr>
-
-### Main Menu
-
-![Star Wars](readme_files/AlienGame.png)
-
-<hr>
+* `Arrow-Up:` Moves the Millenium Falcom Up
+* `Arrow-Down:` Moves the Millenium Falcom Down
+* `Arrow-Left:` Moves the Millenium Falcom Left
+* `Arrow-Right:` Moves the Millenium Falcom Right
+* `Spacebar:` Shoots rockets
+* `P Key:` Pause the game
+* `S Key:` Start a new game (in the main menu)
+* `Q Key:` Quit the game
 
 
-### Contact
+## Contact
 
 * Name: Raul Maya Salazar
 * Phone: +52 833 159 7006
 * E-mail: raulmayas20@gmail.com
 * GitHub: https://github.com/RaulMaya
 * LinkedIn: https://www.linkedin.com/in/raul-maya/
+
+## 📝 Credits
