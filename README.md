@@ -1,6 +1,6 @@
-## <b><u><p align="center">Star Wars IV: Python Strikes Back </p></u></b>
+<h1 align="center">Awesome README Templates</h1>
 
-![Star Wars](readme_files/sw_logo.png)
+![Star Wars](readme_files/sw_logo.png) </p></u>
 
 <hr>
 
