@@ -67,6 +67,5 @@ python star_wars_game.py
 * LinkedIn: https://www.linkedin.com/in/raul-maya/
 
 ## Credits :raised_hands:
-- Book: Python Crash Course: A Hands-On, Project-Based Introduction to Programming by Eric Matthes.
-- https://books.google.com.mx/books/about/Python_Crash_Course.html?id=RXoZCwAAQBAJ&source=kp_book_description&redir_esc=y
-- https://www.amazon.com.mx/Python-Crash-Course-Eric-Matthes/dp/1593279280/ref=sr_1_1?crid=1NXA3FY0WI62R&keywords=python+crash+course&qid=1644954661&sprefix=python+crash%2Caps%2C608&sr=8-1
+- <a href="https://www.amazon.com.mx/Python-Crash-Course-Eric-Matthes/dp/1593279280/ref=sr_1_1?crid=1NXA3FY0WI62R&keywords=python+crash+course&qid=1644954661&sprefix=python+crash%2Caps%2C608&sr=8-1
+">Book: Python Crash Course: A Hands-On, Project-Based Introduction to Programming by Eric Matthes.</a>
